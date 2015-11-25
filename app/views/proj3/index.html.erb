@@ -1,0 +1,72 @@
+<!-- <!DOCTYPE html>
+<html ng-app="app">
+<body>
+
+    <div ng-controller="PostingsCtrl">
+        <button ng-click="loadPosts()">Load Posts</button>
+        
+        <table>
+            <tr >
+                <td>{{ post.title }}</td>
+                <td>{{ post.body }}</td>
+            </tr>
+        </table>
+       
+    </div>
+    
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js"></script> 
+
+    <script type="text/javascript">
+        var app = angular.module('app', ['ngResource']);
+
+        app.controller('PostingsCtrl', ['$scope', '$resource', function($scope, $resource) {
+            $scope.loadPosts = function() {
+                // GET-call to the url http://jsonplaceholder.typicode.com/posts/3
+                // var i = 1;
+                // while(i<101)
+                // {
+                var postingsResource = $resource('http://jsonplaceholder.typicode.com/posts/:postId', { postId: '4');
+                $scope.post = postingsResource.get();
+             //    i++;
+            	// };
+            };
+            
+        }]);
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html ng-app="app">
+<body>
+
+    <div ng-controller="PostingsCtrl">
+        <button ng-click="loadPosts()">Load Posts</button>
+        <table>
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.body }}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js"></script> 
+
+    <script type="text/javascript">
+    
+        var app = angular.module('app', ['ngResource']);
+
+        app.controller('PostingsCtrl', ['$scope', '$resource', function($scope, $resource) {
+            $scope.loadPosts = function() {
+                // GET-call to the url http://jsonplaceholder.typicode.com/posts/3
+                var postingsResource = $resource('http://jsonplaceholder.typicode.com/posts/:postId', { postId: '3'});
+                $scope.post = postingsResource.get();
+            };
+            
+        }]);
+    </script>
+</body>
+</html>
