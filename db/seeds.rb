@@ -5,7 +5,7 @@ require "redis"
 
 
 # Inserting into Redis
-redis = Redis.new
+redis = Redis.new(url: ENV["REDIS_URL"])
 redisfile = File.read('redismongo.json')
 redis_data = JSON.parse(redisfile)
 redis_data.each do |key, value|
