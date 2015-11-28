@@ -8,7 +8,7 @@ default: &default
   adapter: postgresql
   encoding: utf8
   pool: 5
-  host: postgres://tdgwklallzpqhd:PNvm5QW0X3cvntNedD85TcOBQj@ec2-54-83-201-196.compute-1.amazonaws.com:5432/d7puaj502nvvbt
+  # host: postgres://tdgwklallzpqhd:PNvm5QW0X3cvntNedD85TcOBQj@ec2-54-83-201-196.compute-1.amazonaws.com:5432/d7puaj502nvvbt
   username: laevo
   password: Iwbin@1991
 

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'proj3/index'
+  # get 'proj3/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

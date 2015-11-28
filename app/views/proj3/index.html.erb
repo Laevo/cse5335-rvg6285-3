@@ -39,35 +39,39 @@
 </html> -->
 
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 <body>
+<title>Third Project</title>
+<meta charset="utf-8">
 
-    <div ng-controller="PostingsCtrl">
-        <button ng-click="loadPosts()">Load Posts</button>
-        <table>
-            <tr>
-                <td>{{ post.title }}</td>
-                <td>{{ post.body }}</td>
-            </tr>
-        </table>
-    </div>
     
-    <p><a href="http://www.freedevelopertutorials.com/angularjs-tutorial/01-introduction/">Visit the full AngularJS-Tutorial</a> to learn it and see many more interesting examples.</p>
-
+   
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js"></script> 
 
     <script type="text/javascript">
-        var app = angular.module('app', ['ngResource']);
+        var app = angular.module('proj3', ['ngResource']);
 
-        app.controller('PostingsCtrl', ['$scope', '$resource', function($scope, $resource) {
-            $scope.loadPosts = function() {
-                // GET-call to the url http://jsonplaceholder.typicode.com/posts/3
-                var postingsResource = $resource('http://jsonplaceholder.typicode.com/posts/:postId', { postId: '3'});
-                $scope.post = postingsResource.get();
+        app.controller('LoadingCTRL', ['$scope', '$resource', function($scope, $resource) {
+            $scope.DataButton = function() {
+            	// console.log("hello");
+                var OneRecord = @Population;
+                 $scope.Record = OneRecord.get();
             };
             
         }]);
     </script>
+
+    <div ng-app="proj3">
+    <div ng-controller="LoadingCTRL">
+        <button ng-click="DataButton()">Get Data</button>
+        <table>
+            <tr>
+                <td>{{ Record }}</td>
+            </tr>
+        </table>
+    </div>
+    </div>
+
 </body>
 </html>
