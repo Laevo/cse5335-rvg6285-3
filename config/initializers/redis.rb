@@ -1,2 +1,5 @@
 # $redis = Redis.new(:host => 'localhost', :port => 6379)
-REDIS = Redis.new(url: ENV["REDIS_URL"])
+
+# # uri = URI.parse(ENV["REDIS_URL"])
+# # $redis = Redis.new(:url => uri)
+$redis = Redis.new(url: ENV["REDIS_URL"])
