@@ -1,5 +1,5 @@
 class Proj3Controller < ApplicationController
   def index
-  	 @Population = 'hello'
+  	 @Population = mondodb.all
   end
 end
