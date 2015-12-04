@@ -1,76 +1,45 @@
-<!-- <!DOCTYPE html>
-<html ng-app="app">
-<body>
-
-    <div ng-controller="PostingsCtrl">
-        <button ng-click="loadPosts()">Load Posts</button>
-        
-        <table>
-            <tr >
-                <td>{{ post.title }}</td>
-                <td>{{ post.body }}</td>
-            </tr>
-        </table>
-       
-    </div>
-    
-
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js"></script> 
-
-    <script type="text/javascript">
-        var app = angular.module('app', ['ngResource']);
-
-        app.controller('PostingsCtrl', ['$scope', '$resource', function($scope, $resource) {
-            $scope.loadPosts = function() {
-                // GET-call to the url http://jsonplaceholder.typicode.com/posts/3
-                // var i = 1;
-                // while(i<101)
-                // {
-                var postingsResource = $resource('http://jsonplaceholder.typicode.com/posts/:postId', { postId: '4');
-                $scope.post = postingsResource.get();
-             //    i++;
-            	// };
-            };
-            
-        }]);
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
 <body>
-<title>Third Project</title>
-<meta charset="utf-8">
+    <title>Third Project</title>
+    <meta charset="utf-8">
 
-    
-   
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js"></script> 
 
     <script type="text/javascript">
-        var app = angular.module('proj3', ['ngResource']);
+        var app = angular.module('proj3', []);
 
-        app.controller('LoadingCTRL', ['$scope', '$resource', function($scope, $resource) {
+        app.controller('LoadingCTRL', ['$scope', '$http', '$interval',function($scope, $http, $interval) {
             $scope.DataButton = function() {
-            	// console.log("hello");
-                var OneRecord = @Population;
-                 $scope.Record = OneRecord.get();
+                $scope.countries = [];
+                for(i=1;i<101;i++){
+                    $http.get('/proj3/'+i).success(function(data) {
+                        $scope.rank = parseFloat(data[0]);
+                        $scope.country = data[1];
+                        $scope.countries.push({ "rank": $scope.rank, "country": $scope.country });
+                        $scope.rank = "";
+                        $scope.country = "";
+                        console.log (data)
+                    });
+                }
             };
-            
         }]);
     </script>
 
     <div ng-app="proj3">
-    <div ng-controller="LoadingCTRL">
-        <button ng-click="DataButton()">Get Data</button>
-        <table>
-            <tr>
-                <td>{{ Record }}</td>
-            </tr>
-        </table>
-    </div>
+        <div ng-controller="LoadingCTRL">
+            <button ng-click="DataButton()">Get Data</button>
+            <table>
+                <tr>
+                    <th>Rank</th>
+                    <th>Country</th>
+                </tr>
+                <tr ng-repeat="x in countries | orderBy:'rank'">
+                    <td>{{x.rank | number}}</td>
+                    <td>{{x.country}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
 </body>

@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   # get 'proj3/index'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
   # You can have the root of your site routed with "root"
    root 'proj3#index'
+   get '/proj3/:id', to: 'proj3#index' , :defaults => { :format => 'json' }
+ 
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
