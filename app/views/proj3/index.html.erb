@@ -1,46 +1,59 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <title>Third Project</title>
-    <meta charset="utf-8">
+	<title>Third Project</title>
+	<meta charset="utf-8">
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.js"></script>
 
-    <script type="text/javascript">
-        var app = angular.module('proj3', []);
 
-        app.controller('LoadingCTRL', ['$scope', '$http', '$interval',function($scope, $http, $interval) {
-            $scope.DataButton = function() {
-                $scope.countries = [];
-                for(i=1;i<101;i++){
-                    $http.get('/proj3/'+i).success(function(data) {
-                        $scope.rank = parseFloat(data[0]);
-                        $scope.country = data[1];
-                        $scope.countries.push({ "rank": $scope.rank, "country": $scope.country });
-                        $scope.rank = "";
-                        $scope.country = "";
-                        console.log (data)
-                    });
-                }
-            };
-        }]);
-    </script>
+	<script type="text/javascript">
+		var app = angular.module('proj3', ['ngAnimate']);
 
-    <div ng-app="proj3">
-        <div ng-controller="LoadingCTRL">
-            <button ng-click="DataButton()">Get Data</button>
-            <table>
-                <tr>
-                    <th>Rank</th>
-                    <th>Country</th>
-                </tr>
-                <tr ng-repeat="x in countries | orderBy:'rank'">
-                    <td>{{x.rank | number}}</td>
-                    <td>{{x.country}}</td>
-                </tr>
-            </table>
-        </div>
-    </div>
+		app.controller('LoadingCTRL', ['$scope', '$http', function($scope, $http) {
+
+
+
+			$scope.Getdata = function(i){
+				$scope.countries = [];
+				var i = 1;
+				var exec = 0;
+				var time_interval = setInterval(function(){
+					exec += 1;
+					if(exec == 100){
+						clearInterval(time_interval);
+					}
+					$http.get('/proj3/'+i).success(function(data) {
+						$scope.rank = parseFloat(data[0]);
+						$scope.country = data[1];
+						$scope.countries.push({ "rank": $scope.rank, "country": $scope.country });
+						$scope.rank = "";
+						$scope.country = "";
+						console.log (data)
+						i += 1;
+					});
+				}, 500);
+			};
+		}]);
+	</script>
+
+	<div ng-app="proj3">
+		<div ng-controller="LoadingCTRL">
+			<button ng-click="Getdata()"><font align="center" size="5"color="red">Get Data</font></button>
+			<h2 align="center" > <font color="blue"><i><b>Countries Ranked according to thier Population</b></i></font></h2>
+			<table bgcolor="99ffff" align="center" border="1"style="width:50%;border:5px outset teal;" >
+				<tr>
+					<th>Rank</th>
+					<th>Country</th>
+				</tr>
+				<tr ng-repeat="x in countries |orderBy:'rank'|limitTo:100|limitTo:-20" class="animate">
+					<td align="center" bgcolor="#b3ffff"><i>{{x.rank | number}}</i></td>
+					<td align="center" bgcolor="#b3ffff"><i>{{x.country}}</i></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 
 </body>
 </html>
