@@ -3,7 +3,7 @@ CSE5335-RVG6285-3
 
 **Answers**
 
-  1. Loading the data to HerokuRedis was easy, as it was done in the earlier project.  
+  1. Loading the data to HerokuRedis was easy, as it was done in the previous project.  
   It was easy to add animation using `ngAnimate` and display 20 records at a time.  
   
 
